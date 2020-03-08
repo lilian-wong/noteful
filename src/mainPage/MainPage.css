@@ -1,0 +1,33 @@
+body{
+    background-color:rgb(215, 246, 247);
+}
+
+header h1{
+    text-align: center;
+    margin : 0px 0px;
+    padding: 20px;
+    background-color:#D5DAFF;
+}
+
+.Sidebar{
+    min-width: 300px; 
+    width: min-content ;
+    width: 300px;
+    height: 100%;
+
+}
+
+.Main{
+    position: relative;
+  
+    top: -230px;
+    padding: 5px;
+    float: right;
+    width: calc(100% - 300px);
+    text-align: center;
+    height: 100%;
+}
+
+.NoteList_list{
+    padding-inline-start: 0px;
+}
