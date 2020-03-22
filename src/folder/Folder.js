@@ -1,13 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
 import './Folder.css';
 
 export default function Folder(props){
     return(
-        <li>
-            <Link to='/FolderList'>
+        <li className='Folder'>      
+            <NavLink to={`/FolderPage/${props.id}`} >
                 {props.name}
-            </Link>
+            </NavLink>
         </li>
     )
 }

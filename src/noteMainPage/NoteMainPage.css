@@ -2,6 +2,10 @@ body{
     background-color:rgb(215, 246, 247);
 }
 
+a{
+    text-decoration: none;
+}
+
 header h1{
     text-align: center;
     margin : 0px 0px;
@@ -14,20 +18,22 @@ header h1{
     width: min-content ;
     width: 300px;
     height: 100%;
-
 }
 
-.Main{
-    position: relative;
-  
-    top: -230px;
-    padding: 5px;
+.Wrapper{
+    display: flex;
+    
+}
+
+.addNoteButton{
+    width: 80px;
+    height: 80px;
     float: right;
-    width: calc(100% - 300px);
-    text-align: center;
-    height: 100%;
+    border-radius: 50%;
+    border: black solid 2px;
+    font-size: 12px;
 }
 
-.NoteList_list{
-    padding-inline-start: 0px;
+.notes{
+    list-style: none;
 }

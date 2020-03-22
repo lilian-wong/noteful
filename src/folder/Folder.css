@@ -1,7 +1,18 @@
-li {
+
+.FolderList{
+  margin: 10px;
+}
+.Folder{
     list-style-type: none;
-    margin: 10px;
-    padding: 20px;
+    padding: 10px;
     border: #D5DAFF solid 3px;
     background-color: #C9BDFF;
-  }
+    min-width: 100px;
+}
+
+ .AddFolderButton{
+  list-style-type: none;
+  padding: 10px;
+  border: #D5DAFF solid 3px;
+  border-radius: 10px;
+}
