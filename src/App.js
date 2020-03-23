@@ -4,7 +4,7 @@ import NoteMainPage from './noteMainPage/NoteMainPage';
 import NotePage from './notePage/NotePage';
 import dummyStore from './dummy-store';
 import FolderNav from './folderNav/FolderNav';
-
+import NoteNavPage from './noteNavPage/NoteNavPage';
 
 class App extends Component{
   state = {
@@ -59,7 +59,6 @@ class App extends Component{
                 selected.id=== noteId);
               let selectedFolder = selectedNote.find(note =>note.id===noteId);
               if(selectedFolder){
-                
                 return(
                   <NotePage
                     {...routeProps}
@@ -96,14 +95,17 @@ class App extends Component{
                     path={path}
                     render={routeProps => {
                       const {noteId} = routeProps.match.params;
-                      const selectedNote = notes.filter(selected =>
+                      const note = notes.filter(selected =>
                         selected.id=== noteId);
+                      let selectedNote = note.find(note_item =>note_item.id===noteId);
+                      if(selectedNote){
                       return(
-                        <FolderNav
+                        <NoteNavPage
+                          selectedNote= {selectedNote}
                           folders={folders}
-                          notes={selectedNote}
                         />
-                );
+                        );
+                      }
               }}
             />
           ))}
@@ -124,8 +126,7 @@ class App extends Component{
             </nav>
             <main className='App_mainPage'>
               {this.renderNoteRoutes()}
-            </main>
-           
+            </main> 
           </div>
       </div>
     )

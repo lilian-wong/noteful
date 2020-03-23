@@ -2,7 +2,6 @@ import React from 'react';
 import {format} from 'date-fns';
 
 export default function NotePage(props){
-  console.log(props.notes);
     return (
       <section className='Note'>
         <h2>{props.notes.name}</h2>
