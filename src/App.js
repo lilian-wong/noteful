@@ -57,12 +57,16 @@ class App extends Component{
               const {noteId} = routeProps.match.params;
               const selectedNote = notes.filter(selected =>
                 selected.id=== noteId);
-              return(
-                <NotePage
-                  {...routeProps}
-                  notes={selectedNote}
-                />
-              );
+              let selectedFolder = selectedNote.find(note =>note.id===noteId);
+              if(selectedFolder){
+                
+                return(
+                  <NotePage
+                    {...routeProps}
+                    notes={selectedFolder}
+                  />
+                );
+            }
             }}
           />
           ))}
@@ -87,24 +91,23 @@ class App extends Component{
                   />
               ))}
               {['/NotePage/:noteId'].map(path => (
-              <Route 
-                  key={path}
-                  path={path}
-                  render={routeProps => {
-                    const {noteId} = routeProps.match.params;
-                    const selectedNote = notes.filter(selected =>
-                      selected.id=== noteId);
-                    return(
-                      <FolderNav
-                        folders={folders}
-                        notes={notes}
-                      {...routeProps}
-                  />
-                    );
-                  }}
-                />
-                ))}
-              </>
+                <Route 
+                    key={path}
+                    path={path}
+                    render={routeProps => {
+                      const {noteId} = routeProps.match.params;
+                      const selectedNote = notes.filter(selected =>
+                        selected.id=== noteId);
+                      return(
+                        <FolderNav
+                          folders={folders}
+                          notes={selectedNote}
+                        />
+                );
+              }}
+            />
+          ))}
+        </>
   }
 
   render(){

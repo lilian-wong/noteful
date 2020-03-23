@@ -3,7 +3,6 @@ import Note from '../note/Note';
 import './NoteMainPage.css';
 
 export default function NoteMainPage(props) {
-
     return (
       <section className='notePage'>
         <div>

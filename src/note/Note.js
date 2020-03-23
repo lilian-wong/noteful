@@ -4,7 +4,6 @@ import {format} from 'date-fns';
 import './Note.css';
 
 export default function Note(props){
-        console.log(props.id);
     return(
         <section className="Note">
             <h2 className="Note_title">

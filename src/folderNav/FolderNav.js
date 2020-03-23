@@ -2,7 +2,7 @@ import React from 'react';
 import Folder from '../folder/Folder';
 
 export default function FolderNav(props){
-    console.log(props);
+ 
     return(
         <section className='FolderList'>
             <ul className='FolderList_list' aria-live='polite'>
