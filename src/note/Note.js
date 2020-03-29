@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link  } from 'react-router-dom';
 import { format } from 'date-fns';
 import './Note.css';
 import NotefulContext  from '../NotefulContext';
@@ -7,17 +7,16 @@ import config from '../config';
 
 
 export default class Note extends Component{
-    
+   
     static defaultProps = {
         onClickDeleteNote: () => {}
     }
 
     static contextType = NotefulContext;
-
+    
     onClickDeleteNote = e => {
         e.preventDefault();
         const noteId = this.props.id;
-        let history = useHistory();
 
         let url = `${config.API_ENDPOINT}/notes/${noteId}`;
         
@@ -34,9 +33,9 @@ export default class Note extends Component{
             return response.json()
         })
         .then(() => {
-            this.context.deleteNote(noteId);       
-            this.props.history.push('/');
-            this.forceUpdate();
+            this.context.deleteNote(noteId);     
+            this.props.onClickDeleteNote(noteId);
+            window.location.reload(); 
         })
         .catch(error => {
             console.error({error})
@@ -44,9 +43,9 @@ export default class Note extends Component{
     }
 
     render(){
-
-        const { name, id, modified} = this.props;
-           
+        
+        const { name, id, modified } = this.props;
+       console.log(this.props);
         return (
             <section className='Note'>
                 <h2 className='Note_title'>
@@ -59,6 +58,7 @@ export default class Note extends Component{
                             className='delete_btn' 
                             type='button'
                             onClick={this.onClickDeleteNote}
+                           
                         >
                         Delete Note
                         </button>

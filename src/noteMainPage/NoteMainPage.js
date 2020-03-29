@@ -1,10 +1,10 @@
 import React from 'react';  
 import Note from '../note/Note';
 import './NoteMainPage.css';
+
 import  NotefulContext  from '../NotefulContext';
 
 export default function NoteMainPage(props) {
-  
     return (
       <NotefulContext.Consumer>
         {({notes}) =>
@@ -13,13 +13,14 @@ export default function NoteMainPage(props) {
               <ul className='notes'>
                 {  
                   props.notes.map(note =>
-                    <li key={note.id}>
-                      <Note
-                        id={note.id}
-                        name={note.name}
-                        modified={note.modified}
-                      />
-                    </li>
+                      <li key={note.id}>
+                        <Note
+                          id={note.id}
+                          name={note.name}
+                          modified={note.modified}
+                          history = {props.history}
+                        />
+                      </li>
                 )}
               </ul>
               <button className='addNoteButton'>+ Add Note</button>

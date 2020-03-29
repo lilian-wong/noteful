@@ -52,15 +52,25 @@ class App extends Component{
     this.setState({
       notes: newNotes
     })
- 
   }
   renderNoteRoutes(){
       const {notes} = this.state;
      
       return <>
-        <Route exact path = '/'>
+        {/* <Route exact path = '/'>
           <NoteMainPage notes={notes}/>
-        </Route>
+        </Route> */}
+        <Route
+          path='/'  
+          render= {routeProps =>{
+            return(
+              <NoteMainPage 
+              {...routeProps}
+              notes={notes}
+              />
+            )
+          }}
+        />
         {['/FolderPage/:folderId'].map(path => (
           <Route          
               key={path}
@@ -69,6 +79,7 @@ class App extends Component{
                   const {folderId} = routeProps.match.params;
                   const selectedFolder = notes.filter(selected =>
                     selected.folderId=== folderId);
+                    console.log(routeProps);
                   return (
                       <NoteMainPage
                           {...routeProps}
