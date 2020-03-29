@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { format } from 'date-fns';
 import './Note.css';
 import NotefulContext  from '../NotefulContext';
@@ -7,6 +7,7 @@ import config from '../config';
 
 
 export default class Note extends Component{
+    
     static defaultProps = {
         onClickDeleteNote: () => {}
     }
@@ -16,7 +17,10 @@ export default class Note extends Component{
     onClickDeleteNote = e => {
         e.preventDefault();
         const noteId = this.props.id;
+        let history = useHistory();
+
         let url = `${config.API_ENDPOINT}/notes/${noteId}`;
+        
         fetch(url, {
             method: 'DELETE',
             headers: {
@@ -31,6 +35,8 @@ export default class Note extends Component{
         })
         .then(() => {
             this.context.deleteNote(noteId);       
+            this.props.history.push('/');
+            this.forceUpdate();
         })
         .catch(error => {
             console.error({error})
