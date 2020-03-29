@@ -10,7 +10,6 @@ export default function FolderPage(props){
     
     return(
         <div>
-
             <section className='Folder'>
                 <NavLink to={`/FolderPage`} >
                     {selectedFolder[0].name}

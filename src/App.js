@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Route, NavLink } from 'react-router-dom';
 import NoteMainPage from './noteMainPage/NoteMainPage';
 import NotePage from './notePage/NotePage';
-//import dummyStore from './dummy-store';
 import FolderNav from './folderNav/FolderNav';
 import NoteNavPage from './noteNavPage/NoteNavPage';
 //import AddNoteForm from './addNoteForm/AddNoteForm';
@@ -18,7 +17,7 @@ class App extends Component{
       notes: [],
       addFolder: () => {},
       addNote: () => {},
-      deleteNote: () => {},
+      onClickDeleteNote: () => {},
     };
   }
 
@@ -29,12 +28,18 @@ class App extends Component{
       ])
       .then(([noteResponse, folderResponse]) => {
         if(!noteResponse.ok)
-          return noteResponse.json().then(e => Promise.reject(e));
+          return noteResponse.json().then(e => Promise.reject(e))
         if(!folderResponse.ok)
-          return folderResponse.json().then(e => Promise.reject(e));
+          return folderResponse.json().then(e => Promise.reject(e))
+        return Promise.all([
+          noteResponse.json(),
+          folderResponse.json(),
+        ])
       })
+
       .then(([notes, folders]) => {
         this.setState({notes, folders});
+       
       })
       .catch(error => {
         console.error({error});
@@ -42,11 +47,12 @@ class App extends Component{
       
   }
 
-  deleteNote = noteId => {
+  onClickDeleteNote = noteId => {
     const newNotes = this.state.notes.filter( note => note.id !== noteId);
     this.setState({
       notes: newNotes
     })
+ 
   }
   renderNoteRoutes(){
       const {notes} = this.state;
@@ -96,6 +102,7 @@ class App extends Component{
 
   renderFolderRoutes(){
     const {folders, notes} = this.state;
+   
         return <>
               {['/','/FolderPage/:folderId'].map(path => (
                   <Route
@@ -135,8 +142,13 @@ class App extends Component{
   }
 
   render(){
+    const store = {
+      note: this.state.notes,
+      folders: this.state.folders,
+      deleteNote: this.state.onClickDeleteNote
+    }
     return(
-      <NotefulContext.Provider value={this.state} >
+      <NotefulContext.Provider value={store} >
         <div className = 'App'>
             <header className="App_header">
               <h1>
