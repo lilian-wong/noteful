@@ -7,6 +7,7 @@ import NoteNavPage from './noteNavPage/NoteNavPage';
 //import AddNoteForm from './addNoteForm/AddNoteForm';
 import NotefulContext from './NotefulContext';
 import config from './config';
+// import Note from './note/Note';
 
 class App extends Component{
   constructor(props){
@@ -60,17 +61,18 @@ class App extends Component{
         {/* <Route exact path = '/'>
           <NoteMainPage notes={notes}/>
         </Route> */}
-        <Route
-          path='/'  
-          render= {routeProps =>{
-            return(
-              <NoteMainPage 
-              {...routeProps}
-              notes={notes}
-              />
-            )
+        <Route 
+          exact path = '/'
+          render = {routeProps => {
+              return(
+                <NoteMainPage
+                  {...routeProps}
+                  notes ={notes}
+                />
+              )
           }}
-        />
+          />
+
         {['/FolderPage/:folderId'].map(path => (
           <Route          
               key={path}

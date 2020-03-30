@@ -1,32 +1,44 @@
-import React from 'react';  
+import React, { Component } from 'react';  
 import Note from '../note/Note';
 import './NoteMainPage.css';
-
 import  NotefulContext  from '../NotefulContext';
 
-export default function NoteMainPage(props) {
-    return (
-      <NotefulContext.Consumer>
-        {({notes}) =>
-          <section className='notePage'>
+export default class NoteMainPage extends Component {
+  static defaultProps ={
+    match: {
+      params: {}
+    }
+  }
+  static contextType = NotefulContext;
+
+  updateDeleteNote = deletedNotePath => {
+    this.props.history.push('/notes');
+  }
+    render() {
+      const {notes=[]} = this.context;
+      const {deletedNoteId} = this.props.match.params;
+     
+      console.log(this.props.history);
+
+      return(
+          <section className='noteMainPage'>
             <div>
               <ul className='notes'>
                 {  
-                  props.notes.map(note =>
+                  this.props.notes.map(note =>
                       <li key={note.id}>
                         <Note
                           id={note.id}
                           name={note.name}
                           modified={note.modified}
-                          history = {props.history}
+                          onDeleteNote = {this.updateDeleteNote}
                         />
                       </li>
-                )}
+                  )}
               </ul>
               <button className='addNoteButton'>+ Add Note</button>
             </div>
           </section>
+        )
       }
-      </NotefulContext.Consumer>
-    );
 }

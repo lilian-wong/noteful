@@ -34,7 +34,7 @@ export default class Note extends Component{
         })
         .then(() => {
             this.context.deleteNote(noteId);     
-            this.props.onClickDeleteNote(noteId);
+            this.props.onDeleteNote(noteId);
             window.location.reload(); 
         })
         .catch(error => {
@@ -42,10 +42,8 @@ export default class Note extends Component{
         })
     }
 
-    render(){
-        
+    render(){    
         const { name, id, modified } = this.props;
-       console.log(this.props);
         return (
             <section className='Note'>
                 <h2 className='Note_title'>
@@ -58,7 +56,6 @@ export default class Note extends Component{
                             className='delete_btn' 
                             type='button'
                             onClick={this.onClickDeleteNote}
-                           
                         >
                         Delete Note
                         </button>
